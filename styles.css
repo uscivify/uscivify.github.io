@@ -250,3 +250,19 @@ footer {
   opacity: 0.35;
   cursor: default;
 }
+
+.tts-toggle {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 14px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #486581;
+}
+
+.tts-toggle input {
+  width: 18px;
+  height: 18px;
+  accent-color: #b31b2c;
+}

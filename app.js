@@ -18,6 +18,7 @@ const locationNote = document.getElementById("locationNote");
 const progressText = document.getElementById("progressText");
 const remainingText = document.getElementById("remainingText");
 const progressBar = document.getElementById("progressBar");
+const ttsEnabled = document.getElementById("ttsEnabled");
 
 let deck = [];
 let position = 0;
@@ -42,6 +43,12 @@ function startPractice() {
 }
 
 function showQuestion() {
+  stopSpeaking();
+
+  if (ttsEnabled.checked) {
+    setTimeout(speakQuestion, 250);
+  }
+
   const item = deck[position];
   card.classList.remove("flipped");
   previousBtn.disabled = position === 0;
@@ -78,17 +85,22 @@ function showQuestion() {
 }
 
 function nextQuestion() {
+  stopSpeaking();
+
   if (position >= deck.length - 1) {
     practiceScreen.classList.add("hidden");
     completeScreen.classList.remove("hidden");
     restartBtn.classList.add("hidden");
     return;
   }
+
   position += 1;
   showQuestion();
 }
 
 function previousQuestion() {
+  stopSpeaking();
+
   if (position <= 0) {
     return;
   }
@@ -97,12 +109,69 @@ function previousQuestion() {
   showQuestion();
 }
 
-card.addEventListener("click", () => card.classList.toggle("flipped"));
+function stopSpeaking() {
+  window.speechSynthesis.cancel();
+}
+
+function speakText(text) {
+  if (!ttsEnabled.checked || !("speechSynthesis" in window)) {
+    return;
+  }
+
+  stopSpeaking();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "en-US";
+  utterance.rate = 0.9;
+  utterance.pitch = 1;
+
+  window.speechSynthesis.speak(utterance);
+}
+
+function speakQuestion() {
+  const item = deck[position];
+  speakText(item.question);
+}
+
+function speakAnswers() {
+  const item = deck[position];
+
+  const prefix = item.requiredCount
+    ? `Give ${item.requiredCount} answers. `
+    : "";
+
+  speakText(prefix + item.answers.join(". "));
+}
+
+card.addEventListener("click", () => {
+  const isNowFlipped = !card.classList.contains("flipped");
+  card.classList.toggle("flipped");
+
+  if (isNowFlipped) {
+    speakAnswers();
+  } else {
+    speakQuestion();
+  }
+});
+
 startBtn.addEventListener("click", startPractice);
 againBtn.addEventListener("click", startPractice);
 restartBtn.addEventListener("click", startPractice);
 nextBtn.addEventListener("click", nextQuestion);
 previousBtn.addEventListener("click", previousQuestion);
+
+ttsEnabled.checked =
+  localStorage.getItem("ttsEnabled") === "true";
+
+ttsEnabled.addEventListener("change", () => {
+  localStorage.setItem("ttsEnabled", ttsEnabled.checked);
+
+  if (ttsEnabled.checked) {
+    speakQuestion();
+  } else {
+    stopSpeaking();
+  }
+});
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
