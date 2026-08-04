@@ -1,6 +1,6 @@
 # US Civify — New Jersey Edition
 
-A mobile-friendly flashcard app for New Jersey residents preparing for the USCIS 100-question civics test.
+A mobile-friendly flashcard app for New Jersey residents preparing for the USCIS 100-question 2008 civics test.
 
 ## Features
 
@@ -54,3 +54,4 @@ const CACHE = "uscivify-v3";
 Based on the USCIS *Civics (History and Government) Questions for the Naturalization Test*, revision 01/19.
 
 This independent study app is not affiliated with or endorsed by USCIS. Location-specific and current-officeholder answers were added for New Jersey study use and must be verified before the eligibility interview.
+This question set applies to applicants assigned the 2008 civics test. USCIS also uses a newer 2025 civics test with 128 questions, which is not included in this app.
