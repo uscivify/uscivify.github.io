@@ -216,3 +216,37 @@ footer {
   font-size: .84rem;
   font-weight: 700;
 }
+
+.navigation-buttons {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.navigation-buttons .primary-button {
+  flex: 1;
+  width: auto;
+  margin-top: 0;
+}
+
+.previous-button {
+  width: 54px;
+  min-width: 54px;
+  border: 0;
+  border-radius: 15px;
+  background: white;
+  color: #102a43;
+  font-size: 1.5rem;
+  font-weight: 800;
+  box-shadow: 0 8px 20px rgba(16, 42, 67, 0.14);
+}
+
+.previous-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.previous-button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}

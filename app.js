@@ -6,6 +6,7 @@ const startBtn = document.getElementById("startBtn");
 const againBtn = document.getElementById("againBtn");
 const restartBtn = document.getElementById("restartBtn");
 const nextBtn = document.getElementById("nextBtn");
+const previousBtn = document.getElementById("previousBtn");
 const card = document.getElementById("card");
 const questionNumber = document.getElementById("questionNumber");
 const questionText = document.getElementById("questionText");
@@ -43,6 +44,7 @@ function startPractice() {
 function showQuestion() {
   const item = deck[position];
   card.classList.remove("flipped");
+  previousBtn.disabled = position === 0;
   questionNumber.textContent = `#${item.id}${item.asterisk ? " ★" : ""}`;
   questionText.textContent = item.question;
   answerList.replaceChildren();
@@ -86,11 +88,21 @@ function nextQuestion() {
   showQuestion();
 }
 
+function previousQuestion() {
+  if (position <= 0) {
+    return;
+  }
+
+  position -= 1;
+  showQuestion();
+}
+
 card.addEventListener("click", () => card.classList.toggle("flipped"));
 startBtn.addEventListener("click", startPractice);
 againBtn.addEventListener("click", startPractice);
 restartBtn.addEventListener("click", startPractice);
 nextBtn.addEventListener("click", nextQuestion);
+previousBtn.addEventListener("click", previousQuestion);
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {

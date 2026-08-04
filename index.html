@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -12,6 +13,7 @@
   <link rel="stylesheet" href="styles.css">
   <title>US Civify</title>
 </head>
+
 <body>
   <main class="app-shell">
     <header class="topbar">
@@ -27,7 +29,8 @@
       <h2>Practice the 100 civics questions for New Jersey</h2>
       <p>Questions are shuffled. Tap each card to reveal the USCIS-provided answer or accepted answers.</p>
       <button id="startBtn" class="primary-button" type="button">Start Practice</button>
-      <p class="small-note">Some answers change after elections or appointments. Check USCIS test updates before your interview.</p>
+      <p class="small-note">Some answers change after elections or appointments. Check USCIS test updates before your
+        interview.</p>
     </section>
 
     <section id="practiceScreen" class="practice hidden" aria-live="polite">
@@ -35,7 +38,9 @@
         <span id="progressText">Question 1 of 100</span>
         <span id="remainingText">99 remaining</span>
       </div>
-      <div class="progress-track" aria-hidden="true"><div id="progressBar"></div></div>
+      <div class="progress-track" aria-hidden="true">
+        <div id="progressBar"></div>
+      </div>
 
       <button id="card" class="card" type="button" aria-label="Flip card to reveal answer">
         <div class="card-inner">
@@ -49,13 +54,22 @@
             <p id="requiredCount" class="required-count hidden"></p>
             <ul id="answerList"></ul>
             <p id="locationNote" class="location-note hidden"></p>
-            <p id="currentWarning" class="current-warning hidden">This answer can change. Verify it on the USCIS test-updates page.</p>
+            <p id="currentWarning" class="current-warning hidden">This answer can change. Verify it on the USCIS
+              test-updates page.</p>
             <p class="flip-hint">Tap card to see question</p>
           </article>
         </div>
       </button>
 
-      <button id="nextBtn" class="primary-button" type="button">Next Question</button>
+      <div class="navigation-buttons">
+        <button id="previousBtn" class="previous-button" type="button" aria-label="Previous question">
+          ←
+        </button>
+
+        <button id="nextBtn" class="primary-button" type="button">
+          Next Question
+        </button>
+      </div>
     </section>
 
     <section id="completeScreen" class="welcome hidden">
@@ -73,4 +87,5 @@
   <script src="questions.js"></script>
   <script src="app.js"></script>
 </body>
+
 </html>
