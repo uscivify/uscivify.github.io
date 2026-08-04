@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#102a43">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="US Civify">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <title>US Civify</title>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">US NATURALIZATION PRACTICE</p>
+        <h1>US Civify</h1>
+      </div>
+      <button id="restartBtn" class="icon-button hidden" type="button" aria-label="Restart practice">↻</button>
+    </header>
+
+    <section id="welcomeScreen" class="welcome">
+      <div class="seal" aria-hidden="true">★</div>
+      <h2>Practice the 100 civics questions for New Jersey</h2>
+      <p>Questions are shuffled. Tap each card to reveal the USCIS-provided answer or accepted answers.</p>
+      <button id="startBtn" class="primary-button" type="button">Start Practice</button>
+      <p class="small-note">Some answers change after elections or appointments. Check USCIS test updates before your interview.</p>
+    </section>
+
+    <section id="practiceScreen" class="practice hidden" aria-live="polite">
+      <div class="progress-row">
+        <span id="progressText">Question 1 of 100</span>
+        <span id="remainingText">99 remaining</span>
+      </div>
+      <div class="progress-track" aria-hidden="true"><div id="progressBar"></div></div>
+
+      <button id="card" class="card" type="button" aria-label="Flip card to reveal answer">
+        <div class="card-inner">
+          <article class="card-face card-front">
+            <div class="card-label">QUESTION <span id="questionNumber"></span></div>
+            <h2 id="questionText"></h2>
+            <p class="flip-hint">Tap card to reveal answer</p>
+          </article>
+          <article class="card-face card-back">
+            <div class="card-label">ACCEPTED ANSWER<span id="answerPlural"></span></div>
+            <p id="requiredCount" class="required-count hidden"></p>
+            <ul id="answerList"></ul>
+            <p id="locationNote" class="location-note hidden"></p>
+            <p id="currentWarning" class="current-warning hidden">This answer can change. Verify it on the USCIS test-updates page.</p>
+            <p class="flip-hint">Tap card to see question</p>
+          </article>
+        </div>
+      </button>
+
+      <button id="nextBtn" class="primary-button" type="button">Next Question</button>
+    </section>
+
+    <section id="completeScreen" class="welcome hidden">
+      <div class="seal" aria-hidden="true">✓</div>
+      <h2>You reviewed all 100 questions</h2>
+      <p>Start again to reshuffle the full question set.</p>
+      <button id="againBtn" class="primary-button" type="button">Practice Again</button>
+    </section>
+
+    <footer>
+      <p>Based on the USCIS 100 civics questions (rev. 01/19). Not affiliated with or endorsed by USCIS.</p>
+    </footer>
+  </main>
+
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
