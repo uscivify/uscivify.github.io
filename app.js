@@ -24,26 +24,6 @@ const ttsEnabled = document.getElementById("ttsEnabled");
 
 let deck = [];
 let position = 0;
-let preferredVoice = null;
-
-function loadPreferredVoice() {
-  if (!("speechSynthesis" in window)) {
-    return;
-  }
-
-  const voices = window.speechSynthesis.getVoices();
-
-  preferredVoice =
-    voices.find(
-      voice =>
-        voice.lang.toLowerCase().startsWith("en-us") &&
-        voice.name.toLowerCase().includes("ava")
-    ) ||
-    voices.find(
-      voice => voice.lang.toLowerCase().startsWith("en-us")
-    ) ||
-    null;
-}
 
 function shuffle(items) {
   const copy = [...items];
@@ -147,10 +127,6 @@ function speakText(text) {
   utterance.rate = 0.9;
   utterance.pitch = 1;
 
-  if (preferredVoice) {
-    utterance.voice = preferredVoice;
-  }
-
   window.speechSynthesis.speak(utterance);
 }
 
@@ -198,8 +174,6 @@ ttsEnabled.addEventListener("change", () => {
     stopSpeaking();
   }
 });
-
-loadPreferredVoice();
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
