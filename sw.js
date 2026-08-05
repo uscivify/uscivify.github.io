@@ -1,4 +1,4 @@
-const CACHE = "uscivify-v4";
+const CACHE = "uscivify-v5";
 const FILES = [
   "./",
   "./index.html",
